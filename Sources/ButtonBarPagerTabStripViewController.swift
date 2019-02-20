@@ -75,6 +75,9 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
     @IBOutlet public weak var buttonBarView: ButtonBarView!
 
+    // Preventing UIKit/ButtonBarPagerTabStrip from crashing, see the following issues for more detail:
+    // https://github.com/xmartlabs/XLPagerTabStrip/issues/544
+    // https://github.com/xmartlabs/XLPagerTabStrip/issues/388
     private var shouldUpdateContent = true
 
     lazy private var cachedCellWidths: [CGFloat]? = { [unowned self] in
@@ -206,6 +209,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     }
 
     open override func updateContent() {
+      // Make sure updateContent() doesn't get called too often/fast in a row, otherwise we can crash
       if shouldUpdateContent {
         super.updateContent()
       }
