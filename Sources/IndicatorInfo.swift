@@ -24,7 +24,7 @@
 
 import Foundation
 
-public struct IndicatorInfo {
+open class IndicatorInfo: ExpressibleByStringLiteral {
 
     public var title: String?
     public var image: UIImage?
@@ -50,7 +50,7 @@ public struct IndicatorInfo {
         self.highlightedImage = highlightedImage
         self.userInfo = userInfo
     }
-    
+
     public init(title: String?, accessibilityLabel:String?, image: UIImage?, highlightedImage: UIImage? = nil, userInfo: Any? = nil) {
         self.title = title
         self.accessibilityLabel = accessibilityLabel
@@ -59,21 +59,17 @@ public struct IndicatorInfo {
         self.userInfo = userInfo
     }
 
-}
-
-extension IndicatorInfo : ExpressibleByStringLiteral {
-
-    public init(stringLiteral value: String) {
+    required public init(stringLiteral value: String) {
         title = value
         accessibilityLabel = value
     }
 
-    public init(extendedGraphemeClusterLiteral value: String) {
+    required public init(extendedGraphemeClusterLiteral value: String) {
         title = value
         accessibilityLabel = value
     }
 
-    public init(unicodeScalarLiteral value: String) {
+    required public init(unicodeScalarLiteral value: String) {
         title = value
         accessibilityLabel = value
     }
