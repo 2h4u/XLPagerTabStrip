@@ -148,8 +148,8 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
         return false
     }
 
-    open func moveToViewController(at index: Int, animated: Bool = true) {
-        guard isViewLoaded && view.window != nil && currentIndex != index else {
+    open func moveToViewController(at index: Int, animated: Bool = true, forceUpdateInBackground: Bool = false) {
+           guard isViewLoaded && (view.window != nil || forceUpdateInBackground) && currentIndex != index else {
             preCurrentIndex = index
             return
         }
@@ -171,8 +171,8 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
         }
     }
 
-    open func moveTo(viewController: UIViewController, animated: Bool = true) {
-        moveToViewController(at: viewControllers.firstIndex(of: viewController)!, animated: animated)
+    open func moveTo(viewController: UIViewController, animated: Bool = true, forceUpdateInBackground: Bool = false) {
+        moveToViewController(at: viewControllers.firstIndex(of: viewController)!, animated: animated, forceUpdateInBackground: forceUpdateInBackground)
     }
 
     // MARK: - PagerTabStripDataSource
