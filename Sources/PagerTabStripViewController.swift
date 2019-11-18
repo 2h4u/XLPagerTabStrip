@@ -167,6 +167,10 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
             containerView.setContentOffset(CGPoint(x: pageOffsetForChild(at: index), y: 0), animated: true)
         } else {
             (navigationController?.view ?? view).isUserInteractionEnabled = !animated
+            if forceUpdateInBackground {
+              // In case we got a cold app-start via a push notification click, we need to make sure that currentIndex gets set to the correct value
+              currentIndex = index
+            }
             containerView.setContentOffset(CGPoint(x: pageOffsetForChild(at: index), y: 0), animated: animated)
         }
     }
