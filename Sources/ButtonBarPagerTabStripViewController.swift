@@ -341,12 +341,16 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         cell.backgroundColor = settings.style.buttonBarItemBackgroundColor ?? cell.backgroundColor
         if let image = indicatorInfo.image {
             cell.imageView.image = image
+        } else {
+          cell.imageView.image = nil
         }
         if let highlightedImage = indicatorInfo.highlightedImage {
             cell.imageView.highlightedImage = highlightedImage
+        } else {
+          cell.imageView.highlightedImage = nil
         }
 
-        configureCell(cell, indicatorInfo: indicatorInfo)
+        configureCell(cell, indicatorInfo: indicatorInfo, indexPath: indexPath)
 
         if pagerBehaviour.isProgressiveIndicator {
             if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
@@ -372,7 +376,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         shouldUpdateButtonBarView = true
     }
 
-    open func configureCell(_ cell: ButtonBarViewCell, indicatorInfo: IndicatorInfo) {
+    open func configureCell(_ cell: ButtonBarViewCell, indicatorInfo: IndicatorInfo, indexPath: IndexPath) {
     }
 
     private func calculateWidths() -> [CGFloat] {
